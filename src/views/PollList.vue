@@ -2,7 +2,12 @@
   <div
     class="lg:flex lg:flex-row lg:justify-evenly lg:content-start lg:flex-wrap mx-4"
   >
-    <Poll v-for="poll in pollsStore.polls" :key="poll.id" :poll="poll" />
+    <Poll
+      v-for="poll in pollsStore.polls"
+      :key="poll.id"
+      :poll="poll"
+      :stats="pollsStore.stats[poll.id]"
+    />
   </div>
 </template>
 

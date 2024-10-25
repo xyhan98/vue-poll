@@ -4,3 +4,8 @@ export interface Poll {
   optionA: string
   optionB: string
 }
+
+export interface Stats {
+  countA: number
+  countB: number
+}

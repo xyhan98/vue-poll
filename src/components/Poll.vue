@@ -4,46 +4,53 @@
   >
     <div class="text-blue-500 my-2">{{ poll.question }}</div>
 
-    <div class="flex flex-row justify-between items-center my-4 text-pink-400">
+    <div class="flex flex-row justify-between items-center my-4 text-pink-500">
       <span>{{ poll.optionA }}</span>
       <div
-        class="inline-block w-4/5 max-w-[360px] py-1 pr-2 bg-slate-200 text-right"
+        class="inline-block w-4/5 max-w-[360px] py-1 pr-2 bg-slate-200 text-right relative"
         :style="{ cursor: 'pointer' }"
         @click="incrementA"
       >
-        {{ countA }}
+        <div
+          class="inline-block absolute left-0 top-0 h-full bg-pink-300 transition-all duration-500 ease-in-out"
+          :style="{ width: `${(stats.countA / total) * 100}%` }"
+        ></div>
+        <span class="relative z-10">{{ stats.countA }}</span>
       </div>
     </div>
 
-    <div class="flex flex-row justify-between items-center my-4 text-green-400">
+    <div class="flex flex-row justify-between items-center my-4 text-green-500">
       <span>{{ poll.optionB }}</span>
       <div
-        class="inline-block w-4/5 max-w-[360px] py-1 pr-2 bg-slate-200 text-right"
+        class="inline-block w-4/5 max-w-[360px] py-1 pr-2 bg-slate-200 text-right relative"
         :style="{ cursor: 'pointer' }"
         @click="incrementB"
       >
-        {{ countB }}
+        <div
+          class="inline-block absolute left-0 top-0 h-full bg-green-300 transition-all duration-500 ease-in-out"
+          :style="{ width: `${(stats.countB / total) * 100}%` }"
+        ></div>
+        <span class="relative z-10">{{ stats.countB }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { type Poll } from '@/types/poll'
+import { computed } from 'vue'
+import { type Poll, type Stats } from '@/types/poll'
 
-defineProps<{ poll: Poll }>()
+const props = defineProps<{ poll: Poll; stats: Stats }>()
 
-let countA = ref(0)
-let countB = ref(0)
-
-let total = computed(() => countA.value + countB.value)
+let total = computed(() => props.stats.countA + props.stats.countB)
 
 const incrementA = () => {
-  countA.value += 1
+  props.stats.countA += 1
+  //   console.log(props.stats)
 }
 const incrementB = () => {
-  countB.value += 1
+  props.stats.countB += 1
+  //   console.log(props.stats)
 }
 </script>
 

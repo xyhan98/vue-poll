@@ -60,7 +60,10 @@ const pollsStore = usePollsStore()
 
 const add = () => {
   const { question, optionA, optionB } = poll
-  pollsStore.polls.push({ id: nanoid(), question, optionA, optionB })
+  const id = nanoid()
+  pollsStore.polls.push({ id, question, optionA, optionB })
+
+  pollsStore.stats[id] = { countA: 0, countB: 0 }
 
   poll.question = ''
   poll.optionA = ''

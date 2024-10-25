@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { type Stats } from '@/types/poll'
 
 export const usePollsStore = defineStore('polls', {
   state() {
@@ -17,6 +18,10 @@ export const usePollsStore = defineStore('polls', {
           optionB: 'React',
         },
       ],
+      stats: {
+        '1': { countA: 0, countB: 0 },
+        '2': { countA: 0, countB: 0 },
+      } as Record<string, Stats>,
     }
   },
 })
